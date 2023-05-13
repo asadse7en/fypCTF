@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-@!@cp@)cv=tnrn8rbcby^pi=wy8#n^6h-u843x!zxy-s0e&_@v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aupctf.herokuapp.com', '127.0.0.1', 'aupctf.live', 'www.aupctf.live']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'
 
@@ -85,15 +85,10 @@ WSGI_APPLICATION = 'fypCTF.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'da61elihd6c77g',
-        'USER': 'jnqwvwkfkbltth',
-        'PASSWORD': 'bb8ee90b68b862782b8704c87028c25a015880b7ecd688d68574efdd42e16e3f',
-        'HOST': 'ec2-52-21-61-131.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 
 # Password validation
