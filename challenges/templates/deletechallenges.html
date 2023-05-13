@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Delete Challenge</title>
+{% endblock %}
+
+{% block customcss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/deletechallenges.css' %}">
+{% endblock %}
+
+{% block custombody %}
+    <div id="pageHeading">
+        <p>Delete Challenges</p>
+    </div>
+    <div class="container">
+        <div class="form">
+            <div class="registerForm">
+                {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% endif %}
+                <div id="form">
+                    <form method="post" action="{% url 'deletechallenges' %}">
+                        {% csrf_token %}
+                        <label for="challenge_id">Challenge ID*</label>
+                        <br/>
+                        <br/>
+                        <input type="text" name="challenge_id" id="challenge_id" class="form-control" required placeholder="Enter challenge name - Replace space with underscores.">
+                        <br/>
+                        <button type="submit" name="submit" class="submitButton">Delete</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    

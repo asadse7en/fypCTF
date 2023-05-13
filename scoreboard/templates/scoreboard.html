@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>Scoreboard</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'score.css' %}">
+{% endblock %}
+
+{% block custombody %}
+	
+	<div id="pageHeading">
+		<p>Scoreboard</p>
+	</div>
+	
+	<div class="container">
+		<div id="score">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Team Name</th>
+							<th>Points</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for t in teams_list %}
+						<tr>
+							<td>{{ forloop.counter }}</td>
+							<td>
+								<a href="/accounts/team/{{ t.teamname }}" style="color: #008cba;">{{ t.teamname }}</a>
+							</td>
+							<td>
+								{{ t.points }}
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

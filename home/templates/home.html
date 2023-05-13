@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>{{ name }}</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block custombody %}
+<div class="container">
+	<div id="details">
+	  <div class="row">
+		  <h1 class="title">WELCOME TO <span class="name">{{ name }}</span></h1>
+		  <div id="countdown" class="box">
+			{% include 'countdown.html' %}
+		  </div>
+		  <br/>
+		  <div class="categories">
+			<h2 class="categories-title">Challenges are available in the following categories:</h2>
+			<ul class="categories-list">
+			  <li class="category-item">OSINT</li>
+			  <li class="category-item">Cryptography</li>
+			  <li class="category-item">Forensics</li>
+			  <li class="category-item">Web</li>
+			  <li class="category-item">Misc</li>
+			  <li class="category-item">Steganography</li>
+			</ul>
+		  </div>
+		  <br/>
+		  <br/>
+		  <br/>
+	  </div>
+	</div>
+  </div>
+  
+{% endblock %}

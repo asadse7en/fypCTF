@@ -1,0 +1,27 @@
+# CTF name that appears in Navbar, Title, Homepage etc.
+name: "aupCTF"
+
+# to make challenges visible to users set show_challenges: True
+show_challenges: False
+
+
+# add the start and end time of ctf to display on homepage
+# Set the date and time in Pakistan Standard Time (UTC +5)
+ctf_start_time: "2023-06-11T00:00:00"
+ctf_end_time: "2023-06-12T00:00:00"
+
+
+categories:
+# comment the categories you don't want to include in ctf
+- OSINT
+- Cryptography
+- Web
+- #Forensics
+- Stegnography
+- #PWN
+- #Reverse Engineering
+- Misc
+
+
+
+

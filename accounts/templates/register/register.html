@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>Register</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+{% block custombody %}
+
+
+	<!-- Register here -->
+	<div id="register">
+		<label>Register</label>
+		<div class="Form">
+			<form method="post">
+				{% csrf_token %}
+				{% for field in form %}
+					<div>
+						{{ field }}
+						{{ field.errors }}
+					</div>
+				{% endfor %}
+				<button type="submit" name="submit" class="submitButton">SignUp</button>
+			</form>
+			<div class="user">
+				<a href="../login">Already a user? Sign In</a>
+				</div>
+		</div>
+	</div>
+{% endblock %}

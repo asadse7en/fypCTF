@@ -1,0 +1,24 @@
+#score {
+	margin-top: 2%;
+	text-align: center;
+}
+
+table {
+	margin-top: 2%;
+	text-align: left;
+	border-collapse: collapse;
+  }
+  
+  table td:first-child {
+	padding: 10px 5px;
+  }
+  
+  table th {
+	text-align: left;
+  }
+  
+
+table th:first-child,
+table td:first-child {
+  width: 70px;
+}

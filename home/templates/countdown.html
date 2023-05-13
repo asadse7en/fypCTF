@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Countstart</title>
+	<style>
+		.countdown-timer {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+            max-width: 100%;
+            width: 600px;
+			border-radius: 10px;
+		}
+
+		.countdown-timer div {
+		margin: 10px;
+		padding: 10px;
+		background-color: #004346;
+		border-radius: 5px;
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+		color: #fff;
+		text-align: center;
+		font-size: 2rem;
+		font-weight: bold;
+		line-height: 3rem;
+		width: 100px;
+		}
+
+
+		.countdown-timer div span {
+			font-size: 0.5em;
+			text-transform: uppercase;
+		}
+	</style>
+</head>
+<body>
+	<div id="info"></div>
+	<div id="countdown-timer" class="countdown-timer">
+		<div id="days">0<span>Days</span></div>
+		<div id="hours">0<span>Hours</span></div>
+		<div id="minutes">0<span>Minutes</span></div>
+		<div id="seconds">0<span>Seconds</span></div>
+	</div>
+
+	<script>
+		// Set the date and time of the event (in UTC timezone)
+const startTime = new Date("{{ start_time }}").getTime();
+const endTime = new Date("{{ end_time }}").getTime();
+
+// Update the countdown timer every second
+const countdownInterval = setInterval(function() {
+    // Get the current time in UTC timezone
+    const now = new Date().getTime();
+
+    if (now < startTime) {
+        // Countdown to start time
+        const timeLeftStart = startTime - now;
+        const days = Math.floor(timeLeftStart / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeftStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeftStart % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeftStart % (1000 * 60)) / 1000);
+
+        // Update the HTML elements with the new values
+		document.getElementById("info").innerHTML = "Starts In";
+        document.getElementById("days").innerHTML = days + " days";
+        document.getElementById("hours").innerHTML = hours + " hrs";
+        document.getElementById("minutes").innerHTML = minutes + " mins";
+        document.getElementById("seconds").innerHTML = seconds + " secs";
+    } else if (now < endTime) {
+        // Countdown to end time
+        const timeLeftEnd = endTime - now;
+        const days = Math.floor(timeLeftEnd / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeftEnd % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeftEnd % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeftEnd % (1000 * 60)) / 1000);
+
+        // Update the HTML elements with the new values
+		document.getElementById("info").innerHTML = "Ends In";
+        document.getElementById("days").innerHTML = days + " days";
+        document.getElementById("hours").innerHTML = hours + " hrs";
+        document.getElementById("minutes").innerHTML = minutes + " mins";
+        document.getElementById("seconds").innerHTML = seconds + " secs";
+    }
+	else {
+		document.getElementById("countdown-timer").style.display = "none";
+		document.getElementById("info").innerHTML = "The CTF has officially ended";
+		document.getElementById("info").style.display = "block";
+	}
+}, 1000);
+
+	</script>
+</body>
+</html>

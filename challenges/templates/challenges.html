@@ -1,0 +1,875 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>Challenges</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/challenges.css' %}">
+{% endblock %}
+
+{% block custombody %}
+
+	<!-- challenges display -->
+
+	<div id="pageHeading">
+		<p>Challenges</p>
+	</div>
+	{% if user.is_superuser or show_challenges == True%}
+		<div id="challenges">
+			<div class="container">
+				<div class="challengesSet">
+
+					{% if "OSINT" in allowed %}
+
+					<div id="osint">
+						<div class="heading">
+							<p>OSINT</p>
+						</div>
+						{% if data_osint %}
+							{% for mission in data_osint %}
+								{% if mission.challenge_id in user_solved %}
+									<script type="text/javascript">
+										$(document).ready(function() {
+											$("#display_{{ mission.challenge_id }}").addClass("solved");
+										});									
+									</script>
+								{% endif %}
+								<div class="mission" data-toggle="modal" data-target="#{{ mission.challenge_id }}" id="display_{{ mission.challenge_id }}">
+									<div class="name">{{ mission.name }}</div>
+									<p>{{ mission.difficulty }}</p>
+									<p>{{ mission.points }} Points, {{ mission.solve_count }} Solves</p>
+								</div>
+
+								<div class="modal fade" id="{{ mission.challenge_id }}" role="dialog" data-backdrop="static">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">{{ mission.name }} • {{ mission.category }}</h4>
+											</div>
+											<div class="modal-body">
+												{% if mission.hints %}
+												<button type="button" class="hints" id="openMenuButton_{{ mission.challenge_id }}" data-toggle="modal" data-target="#myModal_{{ mission.challenge_id }}">Hint💡</button>
+												<div class="modal fade" id="myModal_{{ mission.challenge_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-body">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<p class="hint-contents">{{ mission.hints|safe }}</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="close-hint">Close</button>
+																<script>
+																	$(document).on('click', '.close-hint', function(){
+																		$(this).closest('.modal').modal('hide');
+																	});
+																</script>
+															</div>
+														</div>
+													</div>
+												</div>
+											{% endif %}
+											
+												<p><b>Challenge Description: </b></p>
+												<p>{{ mission.description|safe }}</p>
+												<br/>
+												{% if mission.file %}
+													<p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
+													<br/>
+												{% endif %}
+												<b>{{ mission.points }} Points, {{ mission.solve_count }} Solves</b>
+												<br/>
+												<br/>
+												{% if mission.author_link %}
+												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												{% else %}
+												<p><b>Creater: {{ mission.author_name }}</b></p>
+												{% endif %}
+												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
+													{% csrf_token %}
+													<input type="text" name="{{ mission.challenge_id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.challenge_id }}_flag">
+													<button type="submit" name="submit" class="input_flag_button">Submit</button>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<script type="text/javascript">
+									$(document).ready(function (){
+										$("#{{ mission.challenge_id }}_flag_form").submit(function(event) {
+											$.ajax({
+												type : "POST",
+												url : "postflag/",
+												data : $(this).serialize(),
+												success : function(response) {
+													$("#{{ mission.challenge_id }}_flag_form").append(response)
+												}
+											});
+											event.preventDefault();
+										});
+									});
+								</script>
+
+							{% endfor %}
+
+						{% else %}
+							<p style="color: red">No challenges available yet</p>
+						{% endif %}
+					</div>
+
+					{% endif %}
+
+					{% if "Cryptography" in allowed %}
+
+					<div id="crypto">
+						<div class="heading">
+							<p>Cryptography</p>
+						</div>
+						{% if data_crypto %}
+							{% for mission in data_crypto %}
+								{% if mission.challenge_id in user_solved %}
+									<script type="text/javascript">
+										$(document).ready(function() {
+											$("#display_{{ mission.challenge_id }}").addClass("solved");
+										});									
+									</script>
+								{% endif %}
+								<div class="mission" data-toggle="modal" data-target="#{{ mission.challenge_id }}" id="display_{{ mission.challenge_id }}">
+									<div class="name">{{ mission.name }}</div>
+									<p>{{ mission.difficulty }}</p>
+									<p>{{ mission.points }} Points, {{ mission.solve_count }} Solves</p>
+								</div>
+
+								<div class="modal fade" id="{{ mission.challenge_id }}" role="dialog" data-backdrop="static">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">{{ mission.name }} • {{ mission.category }}</h4>
+											</div>
+											<div class="modal-body">
+												{% if mission.hints %}
+												<button type="button" class="hints" id="openMenuButton_{{ mission.challenge_id }}" data-toggle="modal" data-target="#myModal_{{ mission.challenge_id }}">Hint💡</button>
+												<div class="modal fade" id="myModal_{{ mission.challenge_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-body">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<p class="hint-contents">{{ mission.hints|safe }}</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="close-hint">Close</button>
+																<script>
+																	$(document).on('click', '.close-hint', function(){
+																		$(this).closest('.modal').modal('hide');
+																	});
+																</script>
+															</div>
+														</div>
+													</div>
+												</div>
+											{% endif %}
+											
+												<p><b>Challenge Description: </b></p>
+												<p>{{ mission.description|safe }}</p>
+												<br/>
+												{% if mission.file %}
+													<p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
+													<br/>
+												{% endif %}
+												<b>{{ mission.points }} Points, {{ mission.solve_count }} Solves</b>
+												<br/>
+												<br/>
+												{% if mission.author_link %}
+												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												{% else %}
+												<p><b>Creater: {{ mission.author_name }}</b></p>
+												{% endif %}
+												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
+													{% csrf_token %}
+													<input type="text" name="{{ mission.challenge_id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.challenge_id }}_flag">
+													<button type="submit" name="submit" class="input_flag_button">Submit</button>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<script type="text/javascript">
+									$(document).ready(function (){
+										$("#{{ mission.challenge_id }}_flag_form").submit(function(event) {
+											$.ajax({
+												type : "POST",
+												url : "postflag/",
+												data : $(this).serialize(),
+												success : function(response) {
+													$("#{{ mission.challenge_id }}_flag_form").append(response)
+												}
+											});
+											event.preventDefault();
+										});
+									});
+								</script>
+
+							{% endfor %}
+
+						{% else %}
+							<p style="color: red">No challenges available yet</p>
+						{% endif %}
+					</div>
+
+					{% endif %}
+
+
+					{% if "Web" in allowed %}
+
+					<div id="web">
+						<div class="heading">
+							<p>Web</p>
+						</div>
+						{% if data_web %}
+							{% for mission in data_web %}
+								{% if mission.challenge_id in user_solved %}
+									<script type="text/javascript">
+										$(document).ready(function() {
+											$("#display_{{ mission.challenge_id }}").addClass("solved");
+										});									
+									</script>
+								{% endif %}
+								<div class="mission" data-toggle="modal" data-target="#{{ mission.challenge_id }}" id="display_{{ mission.challenge_id }}">
+									<div class="name">{{ mission.name }}</div>
+									<p>{{ mission.difficulty }}</p>
+									<p>{{ mission.points }} Points, {{ mission.solve_count }} Solves</p>
+								</div>
+
+								<div class="modal fade" id="{{ mission.challenge_id }}" role="dialog" data-backdrop="static">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">{{ mission.name }} • {{ mission.category }}</h4>
+											</div>
+											<div class="modal-body">
+												{% if mission.hints %}
+												<button type="button" class="hints" id="openMenuButton_{{ mission.challenge_id }}" data-toggle="modal" data-target="#myModal_{{ mission.challenge_id }}">Hint💡</button>
+												<div class="modal fade" id="myModal_{{ mission.challenge_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-body">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<p class="hint-contents">{{ mission.hints|safe }}</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="close-hint">Close</button>
+																<script>
+																	$(document).on('click', '.close-hint', function(){
+																		$(this).closest('.modal').modal('hide');
+																	});
+																</script>
+															</div>
+														</div>
+													</div>
+												</div>
+											{% endif %}
+											
+												<p><b>Challenge Description: </b></p>
+												<p>{{ mission.description|safe }}</p>
+												<br/>
+												{% if mission.file %}
+													<p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
+													<br/>
+												{% endif %}
+												<b>{{ mission.points }} Points, {{ mission.solve_count }} Solves</b>
+												<br/>
+												<br/>
+												{% if mission.author_link %}
+												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												{% else %}
+												<p><b>Creater: {{ mission.author_name }}</b></p>
+												{% endif %}
+												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
+													{% csrf_token %}
+													<input type="text" name="{{ mission.challenge_id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.challenge_id }}_flag">
+													<button type="submit" name="submit" class="input_flag_button">Submit</button>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<script type="text/javascript">
+									$(document).ready(function (){
+										$("#{{ mission.challenge_id }}_flag_form").submit(function(event) {
+											$.ajax({
+												type : "POST",
+												url : "postflag/",
+												data : $(this).serialize(),
+												success : function(response) {
+													$("#{{ mission.challenge_id }}_flag_form").append(response)
+												}
+											});
+											event.preventDefault();
+										});
+									});
+								</script>
+
+							{% endfor %}
+
+						{% else %}
+							<p style="color: red">No challenges available yet</p>
+						{% endif %}
+					</div>
+
+					{% endif %}
+
+					{% if "Forensics" in allowed %}
+
+					<div id="for">
+						<div class="heading">
+							<p>Forensics</p>
+						</div>
+						{% if data_for %}
+							{% for mission in data_for %}
+								{% if mission.challenge_id in user_solved %}
+									<script type="text/javascript">
+										$(document).ready(function() {
+											$("#display_{{ mission.challenge_id }}").addClass("solved");
+										});									
+									</script>
+								{% endif %}
+								<div class="mission" data-toggle="modal" data-target="#{{ mission.challenge_id }}" id="display_{{ mission.challenge_id }}">
+									<div class="name">{{ mission.name }}</div>
+									<p>{{ mission.difficulty }}</p>
+									<p>{{ mission.points }} Points, {{ mission.solve_count }} Solves</p>
+								</div>
+
+								<div class="modal fade" id="{{ mission.challenge_id }}" role="dialog" data-backdrop="static">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">{{ mission.name }} • {{ mission.category }}</h4>
+											</div>
+											<div class="modal-body">
+												{% if mission.hints %}
+												<button type="button" class="hints" id="openMenuButton_{{ mission.challenge_id }}" data-toggle="modal" data-target="#myModal_{{ mission.challenge_id }}">Hint💡</button>
+												<div class="modal fade" id="myModal_{{ mission.challenge_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-body">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<p class="hint-contents">{{ mission.hints|safe }}</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="close-hint">Close</button>
+																<script>
+																	$(document).on('click', '.close-hint', function(){
+																		$(this).closest('.modal').modal('hide');
+																	});
+																</script>
+															</div>
+														</div>
+													</div>
+												</div>
+											{% endif %}
+											
+												<p><b>Challenge Description: </b></p>
+												<p>{{ mission.description|safe }}</p>
+												<br/>
+												{% if mission.file %}
+													<p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
+													<br/>
+												{% endif %}
+												<b>{{ mission.points }} Points, {{ mission.solve_count }} Solves</b>
+												<br/>
+												<br/>
+												{% if mission.author_link %}
+												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												{% else %}
+												<p><b>Creater: {{ mission.author_name }}</b></p>
+												{% endif %}
+												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
+													{% csrf_token %}
+													<input type="text" name="{{ mission.challenge_id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.challenge_id }}_flag">
+													<button type="submit" name="submit" class="input_flag_button">Submit</button>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<script type="text/javascript">
+									$(document).ready(function (){
+										$("#{{ mission.challenge_id }}_flag_form").submit(function(event) {
+											$.ajax({
+												type : "POST",
+												url : "postflag/",
+												data : $(this).serialize(),
+												success : function(response) {
+													$("#{{ mission.challenge_id }}_flag_form").append(response)
+												}
+											});
+											event.preventDefault();
+										});
+									});
+								</script>
+
+							{% endfor %}
+
+						{% else %}
+							<p style="color: red">No challenges available yet</p>
+						{% endif %}
+					</div>
+
+					{% endif %}
+
+					{% if "Stegnography" in allowed %}
+
+					<div id="stego">
+						<div class="heading">
+							<p>Stegnography</p>
+						</div>
+						{% if data_stego %}
+							{% for mission in data_stego %}
+								{% if mission.challenge_id in user_solved %}
+									<script type="text/javascript">
+										$(document).ready(function() {
+											$("#display_{{ mission.challenge_id }}").addClass("solved");
+										});									
+									</script>
+								{% endif %}
+								<div class="mission" data-toggle="modal" data-target="#{{ mission.challenge_id }}" id="display_{{ mission.challenge_id }}">
+									<div class="name">{{ mission.name }}</div>
+									<p>{{ mission.difficulty }}</p>
+									<p>{{ mission.points }} Points, {{ mission.solve_count }} Solves</p>
+								</div>
+
+								<div class="modal fade" id="{{ mission.challenge_id }}" role="dialog" data-backdrop="static">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">{{ mission.name }} • {{ mission.category }}</h4>
+											</div>
+											<div class="modal-body">
+												{% if mission.hints %}
+												<button type="button" class="hints" id="openMenuButton_{{ mission.challenge_id }}" data-toggle="modal" data-target="#myModal_{{ mission.challenge_id }}">Hint💡</button>
+												<div class="modal fade" id="myModal_{{ mission.challenge_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-body">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<p class="hint-contents">{{ mission.hints|safe }}</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="close-hint">Close</button>
+																<script>
+																	$(document).on('click', '.close-hint', function(){
+																		$(this).closest('.modal').modal('hide');
+																	});
+																</script>
+															</div>
+														</div>
+													</div>
+												</div>
+											{% endif %}
+											
+												<p><b>Challenge Description: </b></p>
+												<p>{{ mission.description|safe }}</p>
+												<br/>
+												{% if mission.file %}
+													<p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
+													<br/>
+												{% endif %}
+												<b>{{ mission.points }} Points, {{ mission.solve_count }} Solves</b>
+												<br/>
+												<br/>
+												{% if mission.author_link %}
+												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												{% else %}
+												<p><b>Creater: {{ mission.author_name }}</b></p>
+												{% endif %}
+												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
+													{% csrf_token %}
+													<input type="text" name="{{ mission.challenge_id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.challenge_id }}_flag">
+													<button type="submit" name="submit" class="input_flag_button">Submit</button>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<script type="text/javascript">
+									$(document).ready(function (){
+										$("#{{ mission.challenge_id }}_flag_form").submit(function(event) {
+											$.ajax({
+												type : "POST",
+												url : "postflag/",
+												data : $(this).serialize(),
+												success : function(response) {
+													$("#{{ mission.challenge_id }}_flag_form").append(response)
+												}
+											});
+											event.preventDefault();
+										});
+									});
+								</script>
+
+							{% endfor %}
+
+						{% else %}
+							<p style="color: red">No challenges available yet</p>
+						{% endif %}
+					</div>
+
+					{% endif %}
+
+					{% if "PWN" in allowed %}
+
+					<div id="pwn">
+						<div class="heading">
+							<p>PWN</p>
+						</div>
+						{% if data_pwn %}
+							{% for mission in data_pwn %}
+								{% if mission.challenge_id in user_solved %}
+									<script type="text/javascript">
+										$(document).ready(function() {
+											$("#display_{{ mission.challenge_id }}").addClass("solved");
+										});									
+									</script>
+								{% endif %}
+								<div class="mission" data-toggle="modal" data-target="#{{ mission.challenge_id }}" id="display_{{ mission.challenge_id }}">
+									<div class="name">{{ mission.name }}</div>
+									<p>{{ mission.difficulty }}</p>
+									<p>{{ mission.points }} Points, {{ mission.solve_count }} Solves</p>
+								</div>
+
+								<div class="modal fade" id="{{ mission.challenge_id }}" role="dialog" data-backdrop="static">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">{{ mission.name }} • {{ mission.category }}</h4>
+											</div>
+											<div class="modal-body">
+												{% if mission.hints %}
+												<button type="button" class="hints" id="openMenuButton_{{ mission.challenge_id }}" data-toggle="modal" data-target="#myModal_{{ mission.challenge_id }}">Hint💡</button>
+												<div class="modal fade" id="myModal_{{ mission.challenge_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-body">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<p class="hint-contents">{{ mission.hints|safe }}</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="close-hint">Close</button>
+																<script>
+																	$(document).on('click', '.close-hint', function(){
+																		$(this).closest('.modal').modal('hide');
+																	});
+																</script>
+															</div>
+														</div>
+													</div>
+												</div>
+											{% endif %}
+											
+												<p><b>Challenge Description: </b></p>
+												<p>{{ mission.description|safe }}</p>
+												<br/>
+												{% if mission.file %}
+													<p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
+													<br/>
+												{% endif %}
+												<b>{{ mission.points }} Points, {{ mission.solve_count }} Solves</b>
+												<br/>
+												<br/>
+												{% if mission.author_link %}
+												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												{% else %}
+												<p><b>Creater: {{ mission.author_name }}</b></p>
+												{% endif %}
+												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
+													{% csrf_token %}
+													<input type="text" name="{{ mission.challenge_id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.challenge_id }}_flag">
+													<button type="submit" name="submit" class="input_flag_button">Submit</button>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<script type="text/javascript">
+									$(document).ready(function (){
+										$("#{{ mission.challenge_id }}_flag_form").submit(function(event) {
+											$.ajax({
+												type : "POST",
+												url : "postflag/",
+												data : $(this).serialize(),
+												success : function(response) {
+													$("#{{ mission.challenge_id }}_flag_form").append(response)
+												}
+											});
+											event.preventDefault();
+										});
+									});
+								</script>
+
+							{% endfor %}
+
+						{% else %}
+							<p style="color: red">No challenges available yet</p>
+						{% endif %}
+					</div>
+
+					{% endif %}
+
+					{% if "Reverse Engineering" in allowed %}
+					<div id="re">
+						<div class="heading">
+							<p>Reverse Engineering</p>
+						</div>
+						{% if data_re %}
+							{% for mission in data_re %}
+								{% if mission.challenge_id in user_solved %}
+									<script type="text/javascript">
+										$(document).ready(function() {
+											$("#display_{{ mission.challenge_id }}").addClass("solved");
+										});									
+									</script>
+								{% endif %}
+								<div class="mission" data-toggle="modal" data-target="#{{ mission.challenge_id }}" id="display_{{ mission.challenge_id }}">
+									<div class="name">{{ mission.name }}</div>
+									<p>{{ mission.difficulty }}</p>
+									<p>{{ mission.points }} Points, {{ mission.solve_count }} Solves</p>
+								</div>
+
+								<div class="modal fade" id="{{ mission.challenge_id }}" role="dialog" data-backdrop="static">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">{{ mission.name }} • {{ mission.category }}</h4>
+											</div>
+											<div class="modal-body">
+												{% if mission.hints %}
+												<button type="button" class="hints" id="openMenuButton_{{ mission.challenge_id }}" data-toggle="modal" data-target="#myModal_{{ mission.challenge_id }}">Hint💡</button>
+												<div class="modal fade" id="myModal_{{ mission.challenge_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-body">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<p class="hint-contents">{{ mission.hints|safe }}</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="close-hint">Close</button>
+																<script>
+																	$(document).on('click', '.close-hint', function(){
+																		$(this).closest('.modal').modal('hide');
+																	});
+																</script>
+															</div>
+														</div>
+													</div>
+												</div>
+											{% endif %}
+											
+												<p><b>Challenge Description: </b></p>
+												<p>{{ mission.description|safe }}</p>
+												<br/>
+												{% if mission.file %}
+													<p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
+													<br/>
+												{% endif %}
+												<b>{{ mission.points }} Points, {{ mission.solve_count }} Solves</b>
+												<br/>
+												<br/>
+												{% if mission.author_link %}
+												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												{% else %}
+												<p><b>Creater: {{ mission.author_name }}</b></p>
+												{% endif %}
+												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
+													{% csrf_token %}
+													<input type="text" name="{{ mission.challenge_id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.challenge_id }}_flag">
+													<button type="submit" name="submit" class="input_flag_button">Submit</button>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<script type="text/javascript">
+									$(document).ready(function (){
+										$("#{{ mission.challenge_id }}_flag_form").submit(function(event) {
+											$.ajax({
+												type : "POST",
+												url : "postflag/",
+												data : $(this).serialize(),
+												success : function(response) {
+													$("#{{ mission.challenge_id }}_flag_form").append(response)
+												}
+											});
+											event.preventDefault();
+										});
+									});
+								</script>
+
+							{% endfor %}
+
+						{% else %}
+							<p style="color: red">No challenges available yet</p>
+						{% endif %}
+					</div>
+
+					{% endif %}
+
+
+					{% if "Misc" in allowed %}
+					<div id="mc">
+						<div class="heading">
+							<p>Misc</p>
+						</div>
+						{% if data_misc %}
+							{% for mission in data_misc %}
+								{% if mission.challenge_id in user_solved %}
+									<script type="text/javascript">
+										$(document).ready(function() {
+											$("#display_{{ mission.challenge_id }}").addClass("solved");
+										});									
+									</script>
+								{% endif %}
+								<div class="mission" data-toggle="modal" data-target="#{{ mission.challenge_id }}" id="display_{{ mission.challenge_id }}">
+									<div class="name">{{ mission.name }}</div>
+									<p>{{ mission.difficulty }}</p>
+									<p>{{ mission.points }} Points, {{ mission.solve_count }} Solves</p>
+								</div>
+
+								<div class="modal fade" id="{{ mission.challenge_id }}" role="dialog" data-backdrop="static">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">{{ mission.name }} • {{ mission.category }}</h4>
+											</div>
+											<div class="modal-body">
+												{% if mission.hints %}
+												<button type="button" class="hints" id="openMenuButton_{{ mission.challenge_id }}" data-toggle="modal" data-target="#myModal_{{ mission.challenge_id }}">Hint💡</button>
+												<div class="modal fade" id="myModal_{{ mission.challenge_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-body">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<p class="hint-contents">{{ mission.hints|safe }}</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="close-hint">Close</button>
+																<script>
+																	$(document).on('click', '.close-hint', function(){
+																		$(this).closest('.modal').modal('hide');
+																	});
+																</script>
+															</div>
+														</div>
+													</div>
+												</div>
+											{% endif %}
+											
+												<p><b>Challenge Description: </b></p>
+												<p>{{ mission.description|safe }}</p>
+												<br/>
+												{% if mission.file %}
+													<p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
+													<br/>
+												{% endif %}
+												<b>{{ mission.points }} Points, {{ mission.solve_count }} Solves</b>
+												<br/>
+												<br/>
+												{% if mission.author_link %}
+												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												{% else %}
+												<p><b>Creater: {{ mission.author_name }}</b></p>
+												{% endif %}
+												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
+													{% csrf_token %}
+													<input type="text" name="{{ mission.challenge_id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.challenge_id }}_flag">
+													<button type="submit" name="submit" class="input_flag_button">Submit</button>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<script type="text/javascript">
+									$(document).ready(function (){
+										$("#{{ mission.challenge_id }}_flag_form").submit(function(event) {
+											$.ajax({
+												type : "POST",
+												url : "postflag/",
+												data : $(this).serialize(),
+												success : function(response) {
+													$("#{{ mission.challenge_id }}_flag_form").append(response)
+												}
+											});
+											event.preventDefault();
+										});
+									});
+								</script>
+
+							{% endfor %}
+
+						{% else %}
+							<p style="color: red">No challenges available yet</p>
+						{% endif %}
+					</div>
+
+					{% endif %}
+
+
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$(".closeIT").click(function() {
+					$("#flag_incorrect").remove();
+					$("#flag_correct").remove();
+					$("#flag_already").remove();
+				});
+			})
+		</script>
+
+	{% else %}
+	<p style="font-size: 4em; text-align: center; margin-top: 80px; color: #011627;">not available</p>
+	{% endif %}
+{% endblock %}

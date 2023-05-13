@@ -1,0 +1,232 @@
+#challenges {
+	margin-top: 2%;
+	color:#000;
+}
+
+.heading p {
+	font-size: 25px;
+	font-family: 'ABeeZee', sans-serif;
+	font-weight: bold;
+}
+
+.challengesSet {
+	width: 100%;
+	padding: 20px 0;
+}
+
+.heading {
+	margin-bottom: 25px;
+}
+
+#crypto, #for, #pwn, #re, #stego, #web #osint{
+	/*border-bottom: 4px double #aaa;
+	border-left: 4px double #aaa;*/
+	padding: 10px;
+	margin-bottom: 10px;
+	/*background-color: #eee;
+	box-shadow: 5px 10px 8px 5px #aaa;*/
+}
+
+.mission {
+	height: 120px;
+	width: 220px;
+	display: inline-block;
+	background-color: #5a5a5a;
+	transition: 0.5s;
+	cursor: pointer;
+	color: #fff;
+	padding-top: 15px;
+	margin-right: 25px;
+	margin-bottom: 25px;
+	opacity: 0.9;
+	box-shadow: 0 4px 8px 0 #aaa;
+}
+
+  .mission p {
+	text-align: center;
+	font-size: 16px;
+	margin: 0;
+	padding: 5px;
+  }
+  
+  .name {
+	font-size: 20px;
+	text-align: center;
+	font-family: "Orbitron", sans-serif;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-left: 10px;
+	margin-bottom: 5px;
+	font-weight: bold;
+  }
+
+
+.solved {
+	background-color: #011627;
+}
+
+.mission:hover {
+	opacity: 1; 
+}
+
+.modal a {
+	color: #008cba;
+}
+
+.modal a:hover {
+	text-decoration: underline;
+}
+
+.modal {
+	margin-top: 10%;
+	font-family: 'ABeeZee', sans-serif;
+}
+
+.input_flag {
+	width: 80%;
+	padding:10px;
+	background-color: #eee;
+	border: 0;
+	border-radius: 5px;
+}
+
+.input_flag_button {
+	height: 40px;
+	border: 0;
+	width: 100px;
+	color: #222;
+	background-color: #fff;
+	border: 2px solid #022542;
+	display: inline-block;
+	font-size: 16px;
+	text-decoration: none;
+	transition: 0.5s;
+	/*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+	margin-left: 5px;
+	float: right;
+}
+
+.input_flag_button:hover {
+	background-color: #011627;
+	color: #fff;
+	border: 1px solid #008cba;
+}
+
+.hints {
+	height: 40px;
+	border: 0;
+	border-radius: 4px;
+	width: 80px;
+	color: #444;
+	background-color: #fff;
+	display: inline-block;
+	font-size: 16px;
+	text-decoration: none;
+	transition: 0.5s;
+	margin-left: 5px;
+	margin-right: 10px;
+	float: right;
+	text-align: center;
+	line-height: 40px;
+	font-weight: bold;
+  }
+  
+  
+  .hints:hover {
+	background-color: #444;
+	color: #fff;
+  }
+  
+
+
+#flag_correct, #flag_incorrect, #flag_already {
+	width: 100%;
+	height: 40px;
+	background-color: #4caf50;
+	margin-top: 10px;
+	color: #fff;
+	text-align: center;
+	line-height: 40px;
+	vertical-align: middle;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+#flag_incorrect {
+	background-color: #f44336;
+}
+
+#flag_already {
+	background-color: #008cba;
+}
+
+@media screen and (max-width: 600px) {
+	.input_flag {
+		width: 70%;
+	}
+
+	.input_flag_button {
+		width: 60px;
+		font-size: 12px;
+	}
+}
+
+
+.modal-hints {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.content-hints {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0px 0px 16px 8px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.close-hint {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+	height: 40px;
+	border: 0;
+	border-radius: 4px;
+	width: 80px;
+	color: #444;
+	background-color: #fff;
+	display: inline-block;
+	font-size: 16px;
+	text-decoration: none;
+  }
+  
+
+  .hint-contents{
+	font-size: 18px;
+	text-decoration: none;
+  }
+  
+  .modal-title{
+	font-family: 'Orbitron', sans-serif;
+	font-weight: bolder;
+	font-size: 24px;
+  }
+  

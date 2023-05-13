@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>Add Challenges</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/addchallenge.css' %}">
+{% endblock %}
+
+{% block custombody %}
+	<div id="pageHeading">
+		<p>Add Challenges</p>
+	</div>
+	<div class="container">
+		<div class="form">
+			<div class="registerForm">
+				{% if request.method == 'POST' %}
+				{% if success %}
+					<div id="success">
+						<p>Challenge added</p>
+					</div>
+				{% else %}
+					<div id="failure">
+						<p>Some Error Occured</p>
+					</div>
+				{% endif %}
+			{% endif %}
+			<script src="https://cdn.tiny.cloud/1/5hu8sizq6iv814k9skz51k81ztuugihz6jzg5qopc1g7ile9/tinymce/6/tinymce.min.js"  referrerpolicy="origin"></script>
+
+			<!-- Initialize the TinyMCE editor for the description field -->
+			<script>
+			tinymce.init({
+				selector: '.ckeditor',
+				height: 300,
+				menubar: false,
+				plugins: [
+				'advlist autolink lists link image charmap print preview anchor',
+				'searchreplace visualblocks code fullscreen',
+				'insertdatetime media table paste code help wordcount'
+				],
+				toolbar: 'undo redo | formatselect | ' +
+						'bold italic backcolor | alignleft aligncenter ' +
+						'alignright alignjustify | bullist numlist outdent indent | ' +
+						'removeformat | help',
+				content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+			});
+			</script>
+				<form method="post" enctype="multipart/form-data" autocomplete="off">
+					{% csrf_token %}
+					{% for c in form %}
+						<div>
+							<label>{{ c.label }}</label>
+							{{ c }}
+							<br/>
+						</div>
+					{% endfor %}
+					<button type="submit" name="submit" class="submitButton">Add</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

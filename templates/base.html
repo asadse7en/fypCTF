@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width" , initial-scale=1, viewport-fit="cover">
+	
+	{% block title %}
+
+		<title>{{ name }}</title>
+	
+	{% endblock %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+	<link href='https://fonts.googleapis.com/css?family=Varela' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
+	<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+
+	{% block customcss %}
+	{% endblock %}
+
+</head>
+<body>
+
+	<!-- Navigation bar -->
+	<div id="navigationBar">
+		<div class="container">
+			<div class="navigationBarLeft">
+				<ul>
+					<li><a href="/">{{ name }}</a></li>
+					<li class="des"><a href="/home/">Resources</a></li>
+					<li class="des"><a href="/scoreboard/">Scoreboard</a></li>
+					<li class="des"><a href="/challenges/">Challenges</a></li>
+				</ul>
+			</div>
+			<div class="navigationBarRight">
+				<ul>
+					<li id="navbarToggle">MENU</li>
+					{% if request.user.is_authenticated %}
+					{% if request.user.is_superuser %}
+						<li class="des">
+							<a href="/manage/">Manage &nbsp; | &nbsp; </a>
+							<a href="/accounts/logout/"> Logout</a>
+						</li>
+					{% else %}
+						<li class="des">
+							<a href="/accounts/profile/">Logged in as {{ user.username }} &nbsp; | &nbsp; </a>
+							<a href="/accounts/logout/"> Logout</a>
+						</li>
+					{% endif %}
+					{% else %}
+						<li class="des"><a href="/accounts/login/">Login</a> &nbsp; | &nbsp; <a href="/accounts/register/">Register</a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	{% block custombody %}
+	{% endblock %}
+
+	<!--<div id="footer">
+		
+	</div>-->
+
+	<script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+
+</body>
+</html>

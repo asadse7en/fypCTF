@@ -1,0 +1,33 @@
+#updateForm {
+	width: 700px;
+	max-width: 100%;
+	height: auto;
+	margin: 5% auto;
+	padding: 20px;
+	border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+	font-size: 16px;
+}
+
+input[type=text] {
+	background-color: #dcdcdc;
+	margin-bottom: 20px;
+	border: 0;
+	width: 100%;
+	padding: 10px;
+	margin-top: 2px;
+	box-sizing: border-box;
+}
+
+input[type=text]:focus {
+	border: 2px solid #004346;
+	background-color: #fff;
+}
+
+label {
+	margin-left: 10px; 
+	color: #444;
+}
+
