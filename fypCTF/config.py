@@ -28,3 +28,11 @@ def end_time():
 def show_challenges():
     config = load_config()
     return config['show_challenges']
+
+def scoreboard_frozen():
+    config = load_config()
+    return config['scoreboard_frozen']
+
+def tags():
+    config = load_config()
+    return config['tags']

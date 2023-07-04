@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>Firstblood</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/firstblood.css' %}">
+{% endblock %}
+
+{% block custombody %}
+	
+	<div id="pageHeading">
+		<p>First Blood🩸</p>
+	</div>
+    <div class="container">
+		<div id="updateForm">
+			<div class="stat">
+				<br>
+				<table>
+					{% for s in solves_list %}
+						<tr>
+							<td>
+							    *{{ s.user_name }}* ``` Got First Blood 🩸 On ``` *{{ s.name }}* 🔪
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
+
+{% endblock %}

@@ -12,7 +12,7 @@
 		<title>{{ name }}</title>
 	
 	{% endblock %}
-
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/bootstrap.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 	<link href='https://fonts.googleapis.com/css?family=Varela' rel='stylesheet'>
@@ -24,17 +24,26 @@
 
 	{% block customcss %}
 	{% endblock %}
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-DR06PKTJJH"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
 
-</head>
+	gtag('config', 'G-DR06PKTJJH');
+	</script>
+<!-- 100% privacy friendly analytics -->
+<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript></head>
 <body>
-
 	<!-- Navigation bar -->
 	<div id="navigationBar">
 		<div class="container">
 			<div class="navigationBarLeft">
 				<ul>
-					<li><a href="/">{{ name }}</a></li>
-					<li class="des"><a href="/home/">Home</a></li>
+					<li><a href="/">aupCTF</a></li>
+					<li class="des"><a href="/resources/">Resources</a></li>
 					<li class="des"><a href="/scoreboard/">Scoreboard</a></li>
 					<li class="des"><a href="/challenges/">Challenges</a></li>
 				</ul>
@@ -45,7 +54,7 @@
 					{% if request.user.is_authenticated %}
 					{% if request.user.is_superuser %}
 						<li class="des">
-							<a href="/manage/">Manage &nbsp; | &nbsp; </a>
+							<a href="/manage/">Admin Panel</a> &nbsp; | &nbsp;
 							<a href="/accounts/logout/"> Logout</a>
 						</li>
 					{% else %}
@@ -65,9 +74,16 @@
 	{% block custombody %}
 	{% endblock %}
 
-	<!--<div id="footer">
+	<footer class="footer">
+		<div class="container text-center">
+		<br>
+		<br>
+		<small class="text-muted">Powered by <a href="https://github.com/asadse7en/fypCTF" target="_blank" style="font-weight: bold;">fypCTF</a></small>
+		<br>
+		<br>
+		</div>
+	</footer>
 		
-	</div>-->
 
 	<script type="text/javascript" src="{% static 'js/base.js' %}"></script>
 

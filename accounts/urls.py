@@ -9,7 +9,9 @@ urlpatterns = [
 	path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 	path('register/', manual_views.register, name="register"),
 	path('profile/', manual_views.profile, name="profile"),
-	path('team/', manual_views.team_view, name="team_view"),
-	re_path('team/(?P<pk>.+)', manual_views.every_team, name="every_team"),
-	path('profile/changepassword/', manual_views.update_password, name="update_password")
+	path('user/', manual_views.team_view, name="team_view"),
+	re_path('user/(?P<pk>.+)', manual_views.every_team, name="every_team"),
+	path('profile/changepassword/', manual_views.update_password, name="update_password"),
+    path('profile/update-affiliation/', manual_views.update_affiliation, name='update_affiliation'),
+
 ]

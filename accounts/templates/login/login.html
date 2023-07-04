@@ -17,19 +17,42 @@
 		<label>Login</label>
 		<div class="Form">
 			<form method="post">
-				{% csrf_token %}
-	
-				{% for field in form %}
-					<div>
-						{{ field }}
-						{{ field.errors }}
-					</div>
-				{% endfor %}
+			  {% csrf_token %}
+	  
+			  {% if form.non_field_errors %}
+          <div class="error-message">
+            {% for error in form.non_field_errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div>
+          {{ form.username }}
+          {% if form.errors.username %}
+            <div class="error-message">
+              {% for error in form.errors.username %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div>
+          {{ form.password }}
+          {% if form.errors.password %}
+            <div class="error-message">
+              {% for error in form.errors.password %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
 	
 				<button type="submit" name="submit" class="submitButton">Login</button>
 			</form>
 			<div class="user">
-				<a href="../register">Not a user? Sign Up</a>
+				<a href="../register/">Not a user? Sign Up</a>
 			</div>
 		</div>
 	</div>

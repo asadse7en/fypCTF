@@ -22,13 +22,36 @@
 		  <div class="categories">
 			<h2 class="categories-title">Challenges are available in the following categories:</h2>
 			<ul class="categories-list">
-			  <li class="category-item">OSINT</li>
-			  <li class="category-item">Cryptography</li>
-			  <li class="category-item">Forensics</li>
-			  <li class="category-item">Web</li>
-			  <li class="category-item">Misc</li>
-			  <li class="category-item">Steganography</li>
+				{% for cat in allowed %}
+					<li class="category-item">{{ cat }}</li>
+				{% endfor %}				  
 			</ul>
+			<br>
+			<br>
+			<p class="categories-title">The CTF is scheduled to commence on Saturday June 24, 2023, at 10:00 AM and will continue for a duration of 36 hours..</p>
+			<br>
+			<br>
+			<br>
+			<h1 class="title">Rules</h1>
+			<div class="rules">
+			<br>
+					<li>Challenges are mostly beginner-friendly and some medium difficulty and a couple hard ones.</li>
+					<li>Sharing of flags, hints, solutions or whatever information regarding the challenges between different players is prohibited.</li>
+					<li>No brute-force guessing flags. Feel free to try several flags if you're not sure, but don't try any sort of brute forcing on the flags. </li>
+					<li>Flags are in the format: <b><code>aupCTF{5an1ty-ch3ck} </code></b> except if specified differently.</li>
+					<li>Finally, have fun and try and learn something new!</li>
+
+			<br>
+			<br>
+			</div>
+			<h1 class="title">Tags</h1>
+			<br>
+			<ul class="categories-list">
+				{% for tag in tags %}
+					<li class="category-item">{{ tag }}</li>
+				{% endfor %}				  
+			</ul>
+			</div>
 		  </div>
 		  <br/>
 		  <br/>

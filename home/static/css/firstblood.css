@@ -1,0 +1,62 @@
+#score {
+	margin-top: 2%;
+	text-align: center;
+}
+
+#updateForm {
+	margin: 5% auto;
+	width: 950px;
+	height: auto;
+	max-width: 100%;
+	box-shadow: 0px 0px 16px 8px #00000080;
+	padding: 20px;
+	border-radius: 10px;
+
+}
+
+.stat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  table {
+	margin-top: 2%;
+	text-align: center;
+	border-collapse: collapse;
+	width: 100%;
+	font-family: 'ABeeZee', sans-serif;
+	background-color: #f2f2f2;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  table tr td {
+    padding: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+
+  table tr:nth-child(even) {
+    background-color: #e5e5e5;
+  }
+
+  table tr:last-child td {
+    border-bottom: none;
+  }
+
+
+  b {
+    color: #042c56;
+  }
+
+
+  footer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 20px;
+}

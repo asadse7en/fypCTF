@@ -24,14 +24,14 @@
 				{% for field in form %}
 					<div>
 						{{ field }}
-						{{ field.errors }}
+						<p class="error">{{ field.errors }}</p>
 					</div>
 				{% endfor %}
 				<button type="submit" name="submit" class="submitButton">SignUp</button>
 			</form>
-			<div class="user">
-				<a href="../login">Already a user? Sign In</a>
-				</div>
+		</div>
+		<div class="user">
+			<a href="../login/">Already a user? Sign In</a>
 		</div>
 	</div>
 {% endblock %}

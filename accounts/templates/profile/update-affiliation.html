@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>Update Affiliation</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/update.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block custombody %}
+	
+		<div id="updateForm" style="margin-top: 10%">
+			<div class="chpw">
+                {% if success_msg %}
+                    <p class="success-msg">{{ success_msg }}</p>
+                    <br>
+                {% endif %}
+                <form method="POST" action="{% url 'update_affiliation' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="submitButton">Save</button>
+                </form>
+			</div>
+		</div>
+
+{% endblock %}

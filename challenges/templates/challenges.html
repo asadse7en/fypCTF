@@ -17,7 +17,7 @@
 	<div id="pageHeading">
 		<p>Challenges</p>
 	</div>
-	{% if user.is_superuser or show_challenges == True%}
+	{% if user.is_superuser or show_challenges == True %}
 		<div id="challenges">
 			<div class="container">
 				<div class="challengesSet">
@@ -84,9 +84,9 @@
 												<br/>
 												<br/>
 												{% if mission.author_link %}
-												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												<p><b>Developed By: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
 												{% else %}
-												<p><b>Creater: {{ mission.author_name }}</b></p>
+												<p><b>Developed By: {{ mission.author_name }}</b></p>
 												{% endif %}
 												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
 													{% csrf_token %}
@@ -188,9 +188,9 @@
 												<br/>
 												<br/>
 												{% if mission.author_link %}
-												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												<p><b>Developed By: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
 												{% else %}
-												<p><b>Creater: {{ mission.author_name }}</b></p>
+												<p><b>Developed By: {{ mission.author_name }}</b></p>
 												{% endif %}
 												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
 													{% csrf_token %}
@@ -293,9 +293,9 @@
 												<br/>
 												<br/>
 												{% if mission.author_link %}
-												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												<p><b>Developed By: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
 												{% else %}
-												<p><b>Creater: {{ mission.author_name }}</b></p>
+												<p><b>Developed By: {{ mission.author_name }}</b></p>
 												{% endif %}
 												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
 													{% csrf_token %}
@@ -397,9 +397,9 @@
 												<br/>
 												<br/>
 												{% if mission.author_link %}
-												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												<p><b>Developed By: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
 												{% else %}
-												<p><b>Creater: {{ mission.author_name }}</b></p>
+												<p><b>Developed By: {{ mission.author_name }}</b></p>
 												{% endif %}
 												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
 													{% csrf_token %}
@@ -501,9 +501,9 @@
 												<br/>
 												<br/>
 												{% if mission.author_link %}
-												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												<p><b>Developed By: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
 												{% else %}
-												<p><b>Creater: {{ mission.author_name }}</b></p>
+												<p><b>Developed By: {{ mission.author_name }}</b></p>
 												{% endif %}
 												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
 													{% csrf_token %}
@@ -605,9 +605,9 @@
 												<br/>
 												<br/>
 												{% if mission.author_link %}
-												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												<p><b>Developed By: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
 												{% else %}
-												<p><b>Creater: {{ mission.author_name }}</b></p>
+												<p><b>Developed By: {{ mission.author_name }}</b></p>
 												{% endif %}
 												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
 													{% csrf_token %}
@@ -708,9 +708,9 @@
 												<br/>
 												<br/>
 												{% if mission.author_link %}
-												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												<p><b>Developed By: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
 												{% else %}
-												<p><b>Creater: {{ mission.author_name }}</b></p>
+												<p><b>Developed By: {{ mission.author_name }}</b></p>
 												{% endif %}
 												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
 													{% csrf_token %}
@@ -812,9 +812,9 @@
 												<br/>
 												<br/>
 												{% if mission.author_link %}
-												<p><b>Creater: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
+												<p><b>Developed By: <a href="{{ mission.author_link }}" target="_blank">{{ mission.author_name }}</a></b></p>
 												{% else %}
-												<p><b>Creater: {{ mission.author_name }}</b></p>
+												<p><b>Developed By: {{ mission.author_name }}</b></p>
 												{% endif %}
 												<form method="post" id="{{ mission.challenge_id }}_flag_form" action="postflag/">
 													{% csrf_token %}
@@ -858,16 +858,14 @@
 				</div>
 			</div>
 		</div>
-
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$(".closeIT").click(function() {
-					$("#flag_incorrect").remove();
-					$("#flag_correct").remove();
-					$("#flag_already").remove();
+					$(".remove-element").remove();
 				});
-			})
+			});
 		</script>
+		
 
 	{% else %}
 	<p style="font-size: 4em; text-align: center; margin-top: 80px; color: #011627;">not available</p>

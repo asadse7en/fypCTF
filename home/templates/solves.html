@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>Realtime</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/solves.css' %}">
+{% endblock %}
+
+{% block custombody %}
+	
+	<div id="pageHeading">
+		<p>Realtime</p>
+	</div>
+	
+	<div class="container">
+		<div id="score">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Challenge Name</th>
+							<th>Points</th>
+							<th>Solved By</th>
+							<th>Solved On</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for s in solves_list %}
+						<tr>
+							<td>{{ forloop.counter }}</td>
+							{% if s.first_blood %}
+						<td>
+							{{ s.name }} 🩸
+						</td>
+							{% else %}
+						<td>
+							{{ s.name }}
+						</td>
+							{% endif %}	
+
+							<td>
+								{{ s.points }}
+							</td>
+							<td>
+								{{ s.user_name }}
+							</td>
+							<td>
+								{{ s.time }}
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>Server Error</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/error.css' %}">
+{% endblock %}
+
+{% block custombody %}
+	
+    <div class="code">
+    <div class="four1">
+        5
+    </div>
+    <div class="zero">
+        0
+      </div>
+
+      <div class="zero">
+        0
+      </div>
+    </div>
+
+    <h1>SERVER ERROR</h1>
+
+{% endblock %}

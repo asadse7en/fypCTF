@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>Resources</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/resources.css' %}">
+{% endblock %}
+
+{% block custombody %}
+<body>
+    <main role="main">
+        <div class="container">
+            <br>
+            <br>
+            <h1> Explaining CTF Categories </h1>
+            <br>
+            <br>
+            <h2 class="title">Web</h2>
+            <p>
+              The Web category focuses on web application security. Participants will learn about various vulnerabilities and how to exploit them. The challenges in this category may include SQL injection (SQLi), where participants will manipulate database queries to extract or modify sensitive information. They will also encounter challenges related to cookies and session management, where they will learn about authentication and authorization bypass techniques. Additionally, participants will work with HTTP headers to discover and exploit misconfigurations or security weaknesses. Finally, they will use subdirectory tools to enumerate and find hidden files or directories on web servers. This category will provide valuable insights into web application security and equip participants with essential skills for securing web-based systems.
+            </p>
+          
+            <h2 class="title">Cryptography</h2>
+            <p>
+              Cryptography involves the study of secure communication techniques. In this category, participants will learn about encryption, decryption, hashing, and other cryptographic concepts. They will have the opportunity to solve challenges related to classical ciphers, modern encryption algorithms, and cryptographic protocols. This category will improve their ability to analyze and break codes, as well as design secure communication systems.
+            </p>
+          
+            <h2 class="title">Forensics</h2>
+            <p>
+              The Forensics category focuses on investigating and analyzing digital evidence. Participants will learn techniques to extract hidden information from various file formats, such as images, audio files, and network packets. They will also gain knowledge about file carving, steganalysis, and data recovery. This category will develop their skills in digital forensics, enabling them to uncover and interpret crucial information in real-world scenarios.
+            </p>
+          
+            <h2 class="title">Steganography</h2>
+            <p>
+              Steganography involves hiding information within other files or media. Participants will learn different techniques used to conceal data, such as hiding messages in images, audio files, or even text. They will develop skills to detect and extract hidden information from such files. This category will enhance their understanding of covert communication methods and improve their ability to analyze and manipulate hidden data.
+            </p>
+          
+            <h2 class="title">Miscellaneous (Misc)</h2>
+            <p>
+              The Misc category includes a wide range of challenges that don't fit into other specific categories. It can cover areas like hash cracking, scripting, and more. Participants will face diverse and unconventional problems that require creative thinking and problem-solving skills. This category will encourage participants to explore different areas of cybersecurity and develop a versatile skill set.
+            </p>
+          
+            <h2 class="title">Open Source Intelligence (OSINT)</h2>
+            <p>
+              OSINT involves gathering and analyzing publicly available information to obtain intelligence. In this category, participants will learn techniques for collecting data from open sources such as social media, online forums, and public records. They will develop skills to extract valuable information and identify potential security risks. This category will improve their ability to gather intelligence effectively and enhance their overall cybersecurity awareness.
+            </p>
+            <br>
+            <br>
+            <p class="title">Installing a Virtualization Software</p>
+            <br>
+            <br>
+            <p><a class="link" href="https://kb.vmware.com/s/article/2057907" target="_blank">How to Install VMWare on Windows</a></p>
+            <br>
+            <p><a class="link" href="https://kb.vmware.com/s/article/2057907" target="_blank">How to Install VirtualBox on Windows</a></p>
+            <br>
+            <p class="title">Installing a Linux distribution to run in VirtualBox</p>
+            <br>
+            <p><a class="link" href="https://youtu.be/l97dVIKlmVg" target="_blank">How to Install Kali Linux in VirtualBox</a></p>
+            <br>
+            <p><a class="link" href="https://youtu.be/6ICeYQvNmJ0" target="_blank">How to Install Parrot OS in VirtualBox</a></p>
+            <br>
+            <p><a class="link" href="https://youtu.be/hYaCCpvjsEY" target="_blank">How to Install Ubuntu in VirtualBox</a></p>
+            <br>
+            <p class="title">Useful Tools and Resources</p>
+            <br>
+            <p><a href="https://gchq.github.io/CyberChef/" class="link" target="_blank"><strong>CipherChef</strong></a> and <a href="https://www.dcode.fr/" class="link" target="_blank"><strong>dcode.fr</strong></a> are great tools for cryptographic challenges.</p>
+            <br>
+            <p><a href="https://www.kali.org/tools/wireshark/" class="link" target="_blank"><strong>Wireshark</strong></a> for network packet analysis.</p>
+            <br>
+            <p><a href="https://www.kali.org/tools/dirbuster/" class="link" target="_blank"><strong>Dirbuster</strong></a> for web directory enumeration.</p>
+            <br>
+            <p><a href="https://www.kali.org/tools/john/" class="link" target="_blank"><strong>John the Ripper</strong></a> for password cracking.</p>
+            <br>
+            <p><a href="https://www.kali.org/tools/ghidra/" class="link" target="_blank"><strong>Ghidra</strong></a> for binary exploitation and reverse engineering.</p>
+            <br>
+            <p><a href="https://www.kali.org/tools/nmap/" class="link" target="_blank"><strong>Nmap</strong></a> for network scanning including port scanning, host discovery, OS detection.</p>
+            <br>
+            <p><a href="https://www.google.com" class="link" target="_blank"><strong>Google</strong></a> because, Google.</p>
+            <br>
+            <p><a href="https://www.shodan.io" class="link" target="_blank"><strong>Shodan</strong></a> for advanced open-source intelligence and reconnaissance.</p>
+            <br>
+            <p><a href="https://www.kali.org/tools/" class="link" target="_blank"><strong>Kali Tool Documentation</strong></a> and <a href="https://www.hucerc.com/recommended-tool-list-for-ctf/" class="link"><strong>Howard University Tool Recommendations</strong></a> </p>
+            <br>
+            <p><a href="https://attack.mitre.org/" class="link" target="_blank"><strong>MITRE ATT&amp;CK® Framework</strong></a></p>
+            <br>
+            <p><a href="https://owasp.org/www-project-top-ten/" class="link" target="_blank"><strong>OWASP Top Ten</strong></a></p>
+            <br>
+            <br>
+            <br>
+ 
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+.container {
+    text-align: center;
+  }
+  
+  .link {
+    color: rgb(33, 0, 105);
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 16px;
+    font-family: 'Raleway', sans-serif;
+  }
+  
+
+h1 {
+  color: #555;
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+h2 {
+  color: #666;
+  line-height: 20px;
+}

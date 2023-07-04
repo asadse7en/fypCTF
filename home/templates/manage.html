@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-	<title>Manage</title>
+	<title>Admin Panel</title>
 {% endblock %}
 
 {% block customcss %}
@@ -12,60 +12,72 @@
 
 {% block custombody %}
 	<div id="pageHeading">
-		Manage
+		Admin Panel
 	</div>
+	<br>
+	<br>
+	<h3 style="text-align: center;">Admins/Superuser can use <b>Admin Panel</b> to manage CTF</h3>
 	<div class="container">
 		<div id="updateForm">
-			<p>Admins/Superuser can use <b>Admin Panel</b> to manage CTF</p>
-			<div class="a-container">
-				<a class="a admin" href="/admin">Admin Panel</a>
-				<a class="a add" href="/challenges/admin/add">Add Challenge</a>
-				<a class="a delete" href="/challenges/admin/delete">Delete Challenge</a>
-				<a class="a menu" id="openMenuButton">Download Data</a>
-
-			<div id="myModal" class="modal">
-			<div class="modal-content">
-				<div class="modal-header">
-				<h3 class="modal-title">Download</h3>
-				<span class="close"></span>
-				</div>
-				<div class="modal-body">
-				<a type="button" class="a add">Scoreboard PDF</a>
-				<a type="button" class="a delete" href="/manage/users-data">Users Data</a>
-				<a type="button" class="a admin" href="/manage/scoreboard">Scoreboard CSV</a>
-
-				</div>
+			<h1 class="header">Statistics</h1>
+			<div class="stat">
+				<br>
+				<table>
+					<tr>
+						<td>Total number of participants: <b>{{ total_participants }}</b></td>
+					</tr>
+					<tr>
+						<td>Highest Points Possible: <b>{{ highest_points_possible }}</b></td>
+					</tr>
+					<tr>
+						<td>Total number of challenges: <b>{{ total_challenges }}</b></td>
+					</tr>
+					<tr>
+						<td>Total number of solves: <b>{{ total_solves }}</b></td>
+					</tr>
+					<tr>
+						<td>Cumulative Points Earned: <b>{{ overall_total_points }}</b></td>
+					</tr>
+					<tr>
+						<td><b>{{ most_first_blood_user }}</b> has <b>({{ most_first_blood_count }})</b> the most First Blood🩸
+					</tr>
+					<tr>
+						<td><b>{{ username_most_solves }}</b> has the most solves with <b>{{ most_solve_count }}</b> solves
+						</td>
+					</tr>
+					<tr>
+						<td><b>{{ username_least_solves }}</b> has the least solves with <b>{{ least_solve_count }}</b> solves
+						</td>
+					</tr>
+					 <tr>
+						<td><b>{{ most_solved_challenge }}</b> is the most solved challenge with <b>{{ most_solved_count }}</b> solves
+						</td>
+					</tr>
+					<tr>
+						<td><b>{{ least_solved_challenge }}</b> is the least solved challenge with <b>{{ least_solved_count }}</b> solves
+						</td>
+					</tr>
+					<div>
+					</div>
+				</table>
 			</div>
-			</div>
-
-			<script>
-			// Get the modal
-			var modal = document.getElementById("myModal");
-
-			// Get the button that opens the modal
-			var btn = document.getElementById("openMenuButton");
-
-			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("close")[0];
-
-			// When the user clicks the button, open the modal
-			btn.onclick = function() {
-				modal.style.display = "block";
-			}
-
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function() {
-				modal.style.display = "none";
-			}
-
-			// When the user clicks anywhere outside of the modal, close it
-			window.onclick = function(event) {
-				if (event.target == modal) {
-				modal.style.display = "none";
-				}
-			}
-			</script>				  
-			</div>
+			
 		</div>
-	</div>
+		<div id="updateForm">
+			<h1 class="header">Manage</h1>
+			<div class="a-container">
+				<button class="d-1" onclick="window.location.href='/admin/'">Admin</button>
+				<button class="d-1" onclick="window.location.href='/realtime/'">Realtime</button>
+				<button class="d-1" onclick="window.location.href='/manage/firstblood/'">First Blood🩸</button>
+				<button class="d-1" onclick="window.location.href='/challenges/admin/add'">Add Challenge</button>
+				<button class="d-1" onclick="window.location.href='/challenges/admin/delete'">Delete</button>
+				<div class="a-container">
+				<button class="d-2" style="font-size: 2.5rem;" onclick="window.location.href='/manage/challenges-data/'">Challenges CSV</button>
+				<button class="d-2" style="font-size: 2.5rem;" onclick="window.location.href='/manage/users-data/'">UsersData CSV</button>
+				<button class="d-2" style="font-size: 2.5rem;" onclick="window.location.href='/manage/scoreboard/'">Scoreboard CSV</button>
+				<button class="d-2" style="font-size: 2.5rem;" onclick="window.location.href='/scoreboard-json/'">Scoreboard Json</button>
+				</div>
+			</div>
+		</div> 
+
 {% endblock %}

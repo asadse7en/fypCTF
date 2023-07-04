@@ -1,0 +1,29 @@
+#score {
+	margin-top: 2%;
+	text-align: center;
+}
+
+table {
+  margin-top: 2%;
+  text-align: left;
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+  
+  table td:first-child {
+	padding: 10px 5px;
+  }
+  
+  table th {
+	text-align: left;
+  }
+  
+
+table th:first-child,
+table td:first-child {
+  width: 70px;
+}

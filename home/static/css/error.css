@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+
+.p-container{
+  display: block;
+  text-align: center;
+  margin-top: 5%;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+
+
+.code {
+  font-size: 15em;
+  font-family:Verdana, Tahoma, sans-serif;
+  font-weight: bold;
+  color: #011627;
+  display: inline-block;
+  letter-spacing: -0.05em;
+  display: block;
+  text-align: center;
+
+}
+
+
+
+
+.four1{
+animation: swing ease-in-out 1.5s infinite alternate;
+    display: inline-block;
+}
+.zero{
+  animation: swing2 ease-in-out 1.5s infinite alternate;
+  display: inline-block;
+}
+.four2{
+animation: swing3 ease-in-out 1.5s infinite alternate;
+    display: inline-block;
+}
+
+@keyframes swing {
+    0% { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
+}
+
+@keyframes swing2 {
+    0% { transform: rotate(-3deg); }
+    100% { transform: rotate(3deg); }
+}
+@keyframes swing3 {
+    0% { transform: rotate(-3deg); }
+    100% { transform: rotate(8deg); }
+}
+h1{
+  font-family: 'Fjalla One';
+  text-align: center; 
+  color: #666;
+}
+
+
+
+@media (max-width: 768px) {
+  .code {
+    font-size: 8em;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+  .p-container {
+    margin-top: 2%;
+  }
+}

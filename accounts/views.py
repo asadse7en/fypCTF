@@ -14,6 +14,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 def redirect(request) :
 	return HttpResponseRedirect("login/")
 
+
+
+
 def register(request) :
 
 	if request.user.is_authenticated :
@@ -26,6 +29,7 @@ def register(request) :
 			first_name = form.cleaned_data.get("first_name")
 			last_name = form.cleaned_data.get("last_name")
 			teamname = form.cleaned_data.get("teamname")
+			affiliation = form.cleaned_data.get("affiliation")
 			email = form.cleaned_data.get("email")
 			password = form.cleaned_data.get("password")
 			try :
@@ -42,14 +46,20 @@ def register(request) :
 	
 	return render(request, 'register/register.html', {'form':form})
 
-def profile(request) :
-	return render(request, 'profile/profile.html')
+@login_required(login_url="/accounts/login/")
+def profile(request):
+    try:
+        team = models.Teams.objects.get(email=request.user.email)
+    except models.Teams.DoesNotExist:
+        return redirect('accounts/register')  # Redirect to a view where the user can create a new team
+
+    return render(request, 'profile/profile.html', {'team': team})
 
 
 @login_required(login_url="/accounts/login/")
 def team_view(request) :
 	if request.user.is_superuser :
-		return HttpResponseRedirect("/teams/")
+		return HttpResponseRedirect("/")
 	team_details = models.Teams.objects.get(teamname=request.user)
 	solved_challenges = ChallengesSolvedBy.objects.filter(user_name=request.user)
 	return render(request, 'team/team.html',{'team_details':team_details,'solved_challenges':solved_challenges})
@@ -70,6 +80,23 @@ def update_password(request) :
 	
 	return render(request, 'profile/change-password.html',{'form':form})
 
+from .forms import AffiliationForm
+
+@login_required(login_url="/accounts/login/")
+def update_affiliation(request):
+    team = models.Teams.objects.get(email=request.user.email)
+    success_msg = ""
+
+    if request.method == 'POST':
+        form = AffiliationForm(request.POST, instance=team)
+        if form.is_valid():
+            form.save()
+            success_msg = "Affiliation updated successfully!"
+    else:
+        form = AffiliationForm(instance=team)
+    
+    return render(request, 'profile/update-affiliation.html', {'form': form, 'success_msg': success_msg})
+
 @login_required(login_url="/accounts/login/")
 def every_team(request, pk) :
 	requested_team = pk
@@ -78,4 +105,4 @@ def every_team(request, pk) :
 		solved_team_challenges = ChallengesSolvedBy.objects.filter(user_name=requested_team)
 		return render(request, 'team/team.html', {'team_details':requested_team_details,'solved_challenges':solved_team_challenges})
 	except :
-		return HttpResponseRedirect("/accounts/team/")
+		return HttpResponseRedirect("/accounts/user/")

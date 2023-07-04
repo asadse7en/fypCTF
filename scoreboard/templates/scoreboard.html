@@ -23,7 +23,8 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>Team Name</th>
+							<th>User Name</th>
+							<th>Affiliation</th>
 							<th>Points</th>
 						</tr>
 					</thead>
@@ -32,7 +33,10 @@
 						<tr>
 							<td>{{ forloop.counter }}</td>
 							<td>
-								<a href="/accounts/team/{{ t.teamname }}" style="color: #008cba;">{{ t.teamname }}</a>
+								<a href="/accounts/user/{{ t.teamname }}" style="color: #008cba;">{{ t.teamname }}</a>
+							</td>
+							<td>
+								{{ t.affiliation }}
 							</td>
 							<td>
 								{{ t.points }}

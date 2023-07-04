@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-	<title>Team Details</title>
+	<title>Profile</title>
 {% endblock %}
 
 {% block customcss %}
@@ -18,9 +18,11 @@
 
 	<div class="container">
 		<div id="updateForm">
-			<p><b>Team Name</b> : {{ user.username }}</p>
-			<p><b>Team Email</b> : {{ user.email }}</p>
-			<p><b>Team Profile</b> : <a href="/accounts/team/"> Here📌 </a></p>
+			<p><b>Username</b> : {{ user.username }}</p>
+			<p><b>Email</b> : {{ team.email }}</p>
+			<p><b>Affiliation:</b> {{ team.affiliation }} <a href="{% url 'update_affiliation' %}">⚙️</a></p>
+
+			<p><b>CTF Profile</b> : <a href="/accounts/user/"> 🔗 </a></p>
 			<div style="text-align: center; color: #022542; font-weight: bold;">
 				<a href="changepassword/">Change Password</a>
 			</div>
